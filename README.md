@@ -1,2 +1,2 @@
 # Helloredis
-redis
+redis 基本操作
