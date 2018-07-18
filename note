@@ -1,0 +1,151 @@
+# Redis
+
+### Redis-Server
+
+1. 下载redis的压缩包
+2. 解压
+3. make
+4. make test
+5. 在src路径 ./redis-server
+   - 默认没有制定配置文件，会使用默认配置文件
+   - ./redis-server /configpath
+6. redis.config
+   - bind     允许哪些主机访问
+     - 如果不写的话是允许所有主机绑定，访问
+     - 默认绑定在本机上 127.0.0.1
+   - protect_mode
+     - 保护模式
+     - 默认开启
+     - 保护模式下，没有限制客户端连接，会拒绝数据库操作
+   - requirepass
+     - 设置密码
+
+### Redis-Cli
+
+1. Redis 客户端
+
+2. 在src路径中  ./redis-cli
+
+   - 默认会连接本机的redis
+   - --help  来查看参数
+   - -h   连接哪台电脑上的redis
+   - -p   端口
+   - -a   密码
+
+3. auth
+
+   - 验证密码
+
+4. ping
+
+   - pong代表服务连接成功，调试通了
+
+5. setex key 过期时间   新的值
+
+   - 设置key的过期时间
+   - nil 相当于python中的None，MySQL中Null
+   - 比较常用的地点就是 缓存
+
+6. ttl   key
+
+   - 查看此key的过期时间
+
+7. keys 匹配
+
+   - 根据匹配规则获取key
+   - \* 通配
+
+8. setnx
+
+   - 设置值，当不存在的时候才会设置，生效
+
+9. multiset
+
+   - mset key value [key value...]
+   - python参数列表 args 接收不定长参数（元组）
+
+10. multiget
+
+    - mget key [key...]
+
+11. getrange key START END
+
+    - 截取内容
+    - 闭合区间
+
+12. incr
+
+    - 自增一
+    - 统计使用比较多
+
+13. decr
+
+    - 自减一
+
+14. incrby key 变化值
+
+    - 加法运算
+
+15. decrby key 变化值
+
+    - 减法运算
+
+16. del key
+
+    - 忘记密码
+    - 密码重置链接，有效期24小时，只能使用一次
+
+17. 过期时间
+
+    - 0-n    还有多少时间过期
+    - -2   已过期
+    - -1  不过期（无限时间）
+
+18. randomkey
+
+    - 随机返回一个key
+
+19. flush
+
+    - 冲刷，清理
+    - flushall
+    - flushdb
+
+20. hash操作
+
+    - 和string的区别就是前面都添加了一个统一的前缀   hash简写 h
+    - strings中的key 对应的是字符串
+    - hash 中的key对应都是一个字典（Map，哈希）
+      - hash中还有key-value
+      - key在这里叫 field
+
+21. list操作
+
+    - 和前面两种的类型区别，开头使用 l 作为前缀
+      - list
+      - left
+      - 默认操作都是左边开始，从左向右操作
+    - 如果是右边也是能操作
+      - r 开头
+    - 列表中也是存在索引（下标，从左侧开始）
+
+22. set操作
+
+    - 和前面三种区别， 开头使用 set 的简写 s
+    - set特性是不可重复
+    - 特性
+      - 可以求不同set的交集，合集，差集
+      - 差集是先写的为基础，进行求差
+
+23. zset 操作
+
+    - 和前面四种的区别，开头使用 z
+    - 和set的区别多了一个排序
+      - 排序根据score（权重）
+      - 权重值越大越在后面
+    - 其它操作和set基本一致
+
+24. trim()  （python和js中都有）
+
+    - 剪裁，剪裁字符串的头和尾中的空格
+
